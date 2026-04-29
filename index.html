@@ -4,6 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>表面被覆率シミュレーター - SI物理モデル版</title>
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      chtml: {
+        scale: 1.0,
+        matchFontHeight: false
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
@@ -364,10 +378,20 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       color: #c7d0da;
-      line-height: 1.65;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.82rem;
+      line-height: 1.75;
+      font-size: 0.90rem;
       overflow-x: auto;
+    }
+
+    .formula .mjx-container {
+      color: #d6dee7 !important;
+    }
+
+    .formula-note {
+      margin-top: 10px;
+      color: #95a2ae;
+      line-height: 1.6;
+      font-size: 0.82rem;
     }
 
     .note {
@@ -663,15 +687,56 @@
           <canvas id="rateChart"></canvas>
         </div>
 
-        <div class="formula">
-dΘ/dt = A (1 - Θ) - Rth(Θ) - Bion Θ
-A = s Γn / Ns
-Rth(Θ) = νeff(Θ) exp[-Edes,eff(Θ) / (kB Ts)] Θ^n
-Γi = n_se sqrt(e Te / mi)
-Bion = Y(Ei) Γi / Ns
-Y(Ei) = Ymax [1 - Eth / Ei]^2, ただし Ei > Eth。Ei <= Eth では Y = 0。
-Edes,eff(Θ) = Edes,0 + aE (Θ - 0.5)
-νeff(Θ) = ν0 exp[aν (Θ - 0.5)]
+        <div class="formula" id="formulaBox">
+          $$
+          \frac{d\Theta}{dt}
+          =
+          A(1-\Theta)-R_{\mathrm{th}}(\Theta)-B_{\mathrm{ion}}\Theta
+          $$
+
+          $$
+          A=\frac{s\Gamma_n}{N_s}
+          $$
+
+          $$
+          R_{\mathrm{th}}(\Theta)
+          =
+          \nu_{\mathrm{eff}}(\Theta)
+          \exp\!\left[
+          -\frac{E_{\mathrm{des,eff}}(\Theta)}{k_B T_s}
+          \right]\Theta^n
+          $$
+
+          $$
+          \Gamma_i=n_{\mathrm{se}}\sqrt{\frac{eT_e}{m_i}}
+          $$
+
+          $$
+          B_{\mathrm{ion}}=\frac{Y(E_i)\Gamma_i}{N_s}
+          $$
+
+          $$
+          Y(E_i)=Y_{\max}\left(1-\frac{E_{\mathrm{th}}}{E_i}\right)^2,
+          \qquad E_i>E_{\mathrm{th}}
+          $$
+
+          $$
+          Y(E_i)=0,
+          \qquad E_i\le E_{\mathrm{th}}
+          $$
+
+          $$
+          E_{\mathrm{des,eff}}(\Theta)=E_{\mathrm{des},0}+a_E(\Theta-0.5)
+          $$
+
+          $$
+          \nu_{\mathrm{eff}}(\Theta)=\nu_0\exp\!\left[a_\nu(\Theta-0.5)\right]
+          $$
+
+          <div class="formula-note">
+            単位系は SI を基準とし、Te と Ei と Edes は eV 入力です。したがって e Te は J、kB は eV/K を使っています。
+            n = 1、aE = 0、aν = 0 のときに限り、線形一次 ODE として厳密更新を使います。
+          </div>
         </div>
       </div>
 
@@ -1585,11 +1650,21 @@ Edes,eff(Θ) = Edes,0 + aE (Θ - 0.5)
       requestAnimationFrame(animate);
     }
 
-    initSurfaceSites();
-    bindInputs();
-    updateRatePanelVisibility();
-    resetSimulation();
-    requestAnimationFrame(animate);
+    function typesetMathWhenReady() {
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise()
+          .catch((err) => console.error("MathJax typeset error:", err));
+      }
+    }
+
+    window.addEventListener("load", () => {
+      initSurfaceSites();
+      bindInputs();
+      updateRatePanelVisibility();
+      resetSimulation();
+      typesetMathWhenReady();
+      requestAnimationFrame(animate);
+    });
   </script>
 </body>
 </html>
