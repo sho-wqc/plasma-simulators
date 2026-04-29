@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表面被覆率シミュレーター</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; background-color: #121212; color: #ffffff; margin: 0; padding: 20px; }
+        h2 { color: #00e5ff; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .dashboard { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .panel { background: #1e1e1e; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .graph-panel { flex: 2; min-width: 400px; }
+        .grid-panel { flex: 1; min-width: 300px; display: flex; flex-direction: column; align-items: center; }
+        .controls { display: flex; flex-wrap: wrap; gap: 15px; background: #1e1e1e; padding: 20px; border-radius: 8px; }
+        .control-group { flex: 1; min-width: 200px; }
+        label { display: block; font-size: 0.9em; margin-bottom: 5px; color: #aaa; }
+        .value { color: #00e5ff; font-weight: bold; font-size: 1.1em; }
+        input[type="range"] { width: 100%; cursor: pointer; }
+        .btn { background: #00e5ff; color: #000; border: none; padding: 10px 20px; font-size: 1.1em; font-weight: bold; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 10px; }
+        .btn:hover { background: #00b3cc; }
+        canvas#surfaceGrid { background-color: #000; border: 1px solid #333; margin-top: 10px; }
+        .warning { font-size: 0.85em; color: #888; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>表面被覆率 $\Theta(t)$ の動的バランスとRIEシナジー</h2>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>ラジカルフラックス Γ_in: <span class="value" id="val-gamma">50</span></label>
+                <input type="range" id="gamma" min="0" max="200" value="50">
+            </div>
+            <div class="control-group">
+                <label>実効表面温度 T_s [K]: <span class="value" id="val-temp">300</span></label>
+                <input type="range" id="temp" min="200" max="600" value="300" step="10">
+            </div>
+            <div class="control-group">
+                <label>スティッキング係数 s: <span class="value" id="val-s">0.5</span></label>
+                <input type="range" id="s" min="0.01" max="1.0" value="0.5" step="0.01">
+            </div>
+            <div class="control-group">
+                <label>イオンフラックス Γ_ion (Bias): <span class="value" style="color:#ff4081;" id="val-ion">0</span></label>
+                <input type="range" id="ion" min="0" max="100" value="0">
+            </div>
+            <div class="control-group" style="flex: 0.5;">
+                <button class="btn" id="resetBtn">リセット / 開始</button>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="panel graph-panel">
+                <canvas id="timeChart"></canvas>
+            </div>
+            <div class="panel grid-panel">
+                <h3 style="margin:0; font-size:1em; color:#aaa;">表面サイト (20x20)</h3>
+                <canvas id="surfaceGrid" width="300" height="300"></canvas>
+                <p style="margin-top:10px;">被覆率: <span id="current-theta" class="value">0.000</span></p>
+            </div>
+        </div>
+
+        <p class="warning">※ dΘ/dt = s·Γ_in·(1 - Θ) - k_des·Θ - Y_des·Γ_ion·Θ をリアルタイムに解いています。各変数は定性的な理解を目的とした任意単位(a.u.)です。</p>
+    </div>
+
+    <script>
+        // 定数・変数
+        const nu = 1e13, Ea = 0.8, kB = 8.617e-5, Y_des = 0.5;
+        let t = 0, theta = 0;
+        let timeData = [], thetaData = [];
+        let animationId;
+        const dt = 0.1; // タイムステップ
+
+        // UI要素
+        const uiGamma = document.getElementById('gamma');
+        const uiTemp = document.getElementById('temp');
+        const uiS = document.getElementById('s');
+        const uiIon = document.getElementById('ion');
+        const vGamma = document.getElementById('val-gamma');
+        const vTemp = document.getElementById('val-temp');
+        const vS = document.getElementById('val-s');
+        const vIon = document.getElementById('val-ion');
+        const vTheta = document.getElementById('current-theta');
+
+        // UI更新リスナー
+        [uiGamma, uiTemp, uiS, uiIon].forEach(el => {
+            el.addEventListener('input', () => {
+                vGamma.innerText = uiGamma.value;
+                vTemp.innerText = uiTemp.value;
+                vS.innerText = uiS.value;
+                vIon.innerText = uiIon.value;
+            });
+        });
+
+        // グラフの初期化
+        const ctxChart = document.getElementById('timeChart').getContext('2d');
+        Chart.defaults.color = '#aaaaaa';
+        const chart = new Chart(ctxChart, {
+            type: 'line',
+            data: { labels: timeData, datasets: [{
+                label: '被覆率 Θ(t)', data: thetaData,
+                borderColor: '#00e5ff', backgroundColor: 'rgba(0, 229, 255, 0.1)',
+                borderWidth: 2, fill: true, pointRadius: 0, tension: 0.1
+            }]},
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                animation: false,
+                scales: {
+                    x: { title: { display: true, text: 'Time' }, min: 0, max: 100 },
+                    y: { title: { display: true, text: 'Coverage Θ' }, min: 0, max: 1.0 }
+                }
+            }
+        });
+
+        // 2Dグリッドの初期化
+        const canvasGrid = document.getElementById('surfaceGrid');
+        const ctxGrid = canvasGrid.getContext('2d');
+        const N = 20, totalSites = N * N;
+        const cellSize = canvasGrid.width / N;
+        // ランダムな描画順序を生成（吸着サイトをバラバラに表示するため）
+        let siteIndices = Array.from({length: totalSites}, (_, i) => i);
+
+        function drawGrid(currentTheta) {
+            ctxGrid.clearRect(0, 0, canvasGrid.width, canvasGrid.height);
+            const numAdsorbed = Math.floor(currentTheta * totalSites);
+            
+            // 毎フレームシャッフルするとチラつくので、配列の先頭N個を吸着とする
+            // （よりリアルにするための簡易処理）
+            for (let i = 0; i < totalSites; i++) {
+                const idx = siteIndices[i];
+                const x = (idx % N) * cellSize;
+                const y = Math.floor(idx / N) * cellSize;
+                
+                if (i < numAdsorbed) {
+                    ctxGrid.fillStyle = '#00e5ff'; // 吸着
+                } else {
+                    ctxGrid.fillStyle = '#111111'; // 空き
+                }
+                ctxGrid.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
+            }
+        }
+
+        // シミュレーションループ
+        function loop() {
+            const gamma = parseFloat(uiGamma.value);
+            const temp = parseFloat(uiTemp.value);
+            const s = parseFloat(uiS.value);
+            const ion = parseFloat(uiIon.value);
+
+            // 脱離定数の計算 (アレニウス)
+            const k_des_raw = nu * Math.exp(-Ea / (kB * temp));
+            const k_des = k_des_raw * 1e-11; // 描画用スケール
+
+            // 微分方程式 dΘ/dt
+            const dTheta = (s * gamma * (1 - theta) - k_des * theta - Y_des * ion * theta) * dt;
+            theta += dTheta;
+            if (theta < 0) theta = 0;
+            if (theta > 1) theta = 1;
+            t += dt;
+
+            // グラフデータの更新
+            timeData.push(t.toFixed(1));
+            thetaData.push(theta);
+            
+            // 横軸をスクロールさせる
+            if (t > 100) {
+                chart.options.scales.x.min = t - 100;
+                chart.options.scales.x.max = t;
+                timeData.shift();
+                thetaData.shift();
+            }
+
+            chart.update();
+            vTheta.innerText = theta.toFixed(3);
+            
+            // 視覚的ノイズを持たせるために時々配列をシャッフル
+            if (Math.random() < 0.1) {
+                siteIndices.sort(() => Math.random() - 0.5);
+            }
+            drawGrid(theta);
+
+            animationId = requestAnimationFrame(loop);
+        }
+
+        // リセット処理
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            cancelAnimationFrame(animationId);
+            t = 0; theta = 0;
+            timeData.length = 0; thetaData.length = 0;
+            chart.options.scales.x.min = 0; chart.options.scales.x.max = 100;
+            siteIndices.sort(() => Math.random() - 0.5);
+            loop();
+        });
+
+        // 初期起動
+        siteIndices.sort(() => Math.random() - 0.5);
+        loop();
+    </script>
+</body>
+</html>
