@@ -22,9 +22,7 @@
       --blue2: #263142;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -51,7 +49,7 @@
 
     h1 {
       margin: 0;
-      font-size: 1.45rem;
+      font-size: 1.42rem;
       font-weight: 500;
       letter-spacing: 0.02em;
       color: var(--cyan);
@@ -65,11 +63,11 @@
     }
 
     .status {
-      min-width: 230px;
+      min-width: 270px;
       padding: 12px 14px;
       border: 1px solid var(--line);
       border-radius: 10px;
-      background: rgba(26, 29, 36, 0.8);
+      background: rgba(26, 29, 36, 0.84);
       text-align: right;
     }
 
@@ -84,83 +82,13 @@
       font-size: 2.0rem;
       font-variant-numeric: tabular-nums;
       font-weight: 650;
+      line-height: 1.1;
     }
 
-    .recipe-panel {
-      background: rgba(26, 29, 36, 0.94);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    }
-
-    .section-title {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 12px;
-    }
-
-    .section-title h2 {
-      margin: 0;
-      font-size: 1.03rem;
-      font-weight: 560;
-      color: #dbe4ee;
-    }
-
-    .section-title .section-note {
-      color: #8d98a5;
-      font-size: 0.82rem;
-      line-height: 1.45;
-    }
-
-    .controls {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(210px, 1fr));
-      gap: 12px;
-    }
-
-    .control-card {
-      background: var(--panel2);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 13px 14px;
-    }
-
-    .control-card.primary {
-      border-color: rgba(0, 215, 255, 0.42);
-      background: linear-gradient(180deg, rgba(0, 215, 255, 0.055), rgba(21, 24, 32, 0.96));
-    }
-
-    label {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 0.88rem;
-      margin-bottom: 8px;
-    }
-
-    .value {
-      color: var(--cyan);
-      font-weight: 650;
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
-    }
-
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--cyan);
-      cursor: pointer;
-    }
-
-    .hint {
+    .status .meta {
       margin-top: 8px;
-      color: #7f8994;
-      font-size: 0.76rem;
+      color: #93a0ad;
+      font-size: 0.80rem;
       line-height: 1.45;
     }
 
@@ -171,11 +99,18 @@
       margin-bottom: 18px;
     }
 
+    .details-stack {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
     details {
-      background: rgba(26, 29, 36, 0.86);
+      background: rgba(26, 29, 36, 0.94);
       border: 1px solid var(--line);
       border-radius: 12px;
       overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.24);
     }
 
     summary {
@@ -210,13 +145,85 @@
       padding: 14px;
     }
 
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
     .details-body .controls {
-      grid-template-columns: repeat(2, minmax(210px, 1fr));
+      grid-template-columns: repeat(4, minmax(210px, 1fr));
+    }
+
+    .control-card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 13px 14px;
+      min-height: 122px;
+    }
+
+    .control-card.primary {
+      border-color: rgba(0, 215, 255, 0.42);
+      background: linear-gradient(180deg, rgba(0, 215, 255, 0.055), rgba(21, 24, 32, 0.96));
+    }
+
+    .control-card.check {
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+
+    .value {
+      color: var(--cyan);
+      font-weight: 650;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #dce4ed;
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .hint {
+      margin-top: 8px;
+      color: #7f8994;
+      font-size: 0.76rem;
+      line-height: 1.45;
     }
 
     .main {
       display: grid;
-      grid-template-columns: minmax(460px, 1.55fr) minmax(380px, 1fr);
+      grid-template-columns: minmax(480px, 1.55fr) minmax(380px, 1fr);
       gap: 18px;
     }
 
@@ -228,22 +235,37 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.26);
     }
 
+    .panel h2 {
+      margin: 0 0 12px 0;
+      font-size: 1.02rem;
+      font-weight: 500;
+      color: #dbe4ee;
+    }
+
     .chart-wrap {
-      height: 420px;
+      height: 390px;
       position: relative;
+    }
+
+    .subchart-wrap {
+      height: 112px;
+      position: relative;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      display: none;
+    }
+
+    .subchart-title {
+      color: #9aa7b3;
+      font-size: 0.80rem;
+      margin-bottom: 6px;
     }
 
     .surface-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .panel h2 {
-      margin: 0 0 12px 0;
-      font-size: 1.02rem;
-      font-weight: 500;
-      color: #dbe4ee;
     }
 
     canvas#surfaceCanvas {
@@ -277,7 +299,7 @@
     }
 
     .metric .num {
-      font-size: 1.02rem;
+      font-size: 1.00rem;
       font-weight: 650;
       font-variant-numeric: tabular-nums;
       color: var(--text);
@@ -300,16 +322,11 @@
       font-weight: 700;
       color: #051015;
       background: var(--cyan);
-      transition: transform 0.08s ease, background 0.2s ease, opacity 0.2s ease;
+      transition: transform 0.08s ease, background 0.2s ease;
     }
 
-    button:hover {
-      background: #00bfe3;
-    }
-
-    button:active {
-      transform: translateY(1px);
-    }
+    button:hover { background: #00bfe3; }
+    button:active { transform: translateY(1px); }
 
     button.secondary {
       color: var(--text);
@@ -317,9 +334,7 @@
       border: 1px solid #3d4654;
     }
 
-    button.secondary:hover {
-      background: #363f4d;
-    }
+    button.secondary:hover { background: #363f4d; }
 
     .legend {
       display: flex;
@@ -342,15 +357,6 @@
       border-radius: 50%;
     }
 
-    .note {
-      margin-top: 18px;
-      color: #99a4af;
-      line-height: 1.65;
-      font-size: 0.88rem;
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
-    }
-
     .formula {
       margin-top: 14px;
       padding: 12px 14px;
@@ -364,8 +370,18 @@
       overflow-x: auto;
     }
 
+    .note {
+      margin-top: 18px;
+      color: #99a4af;
+      line-height: 1.65;
+      font-size: 0.88rem;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
     @media (max-width: 1080px) {
-      .controls {
+      .controls,
+      .details-body .controls {
         grid-template-columns: repeat(2, minmax(210px, 1fr));
       }
 
@@ -379,9 +395,7 @@
     }
 
     @media (max-width: 680px) {
-      body {
-        padding: 12px;
-      }
+      body { padding: 12px; }
 
       .topbar {
         flex-direction: column;
@@ -393,25 +407,14 @@
       }
 
       .controls,
-      .details-body .controls {
-        grid-template-columns: 1fr;
-      }
-
-      .metrics {
-        grid-template-columns: 1fr;
-      }
-
+      .details-body .controls,
+      .metrics,
       .buttons {
         grid-template-columns: 1fr;
       }
 
       .chart-wrap {
         height: 340px;
-      }
-
-      .section-title {
-        flex-direction: column;
-        align-items: flex-start;
       }
     }
   </style>
@@ -423,177 +426,229 @@
       <div>
         <h1>表面被覆率 Θ(t) シミュレーター - SI物理モデル版</h1>
         <div class="subtitle">
-          吸着、熱脱離、イオン誘起脱離を、表面サイト密度で規格化した一次反応モデルとして扱います。
-          通常はプロセスレシピ欄だけを操作し、材料・モデル定数は必要なときだけ開いて調整します。
+          吸着、Polanyi-Wigner 型の熱脱離、イオン誘起脱離を、表面サイト密度で規格化した 0D 平均場モデルとして扱います。
+          通常はプラズマ状態パラメータだけを操作し、材料・モデル詳細は必要なときだけ開いて調整します。
         </div>
       </div>
 
       <div class="status">
         <div class="label">現在の被覆率 Θ</div>
         <div class="theta" id="thetaNow">0.000</div>
+        <div class="meta" id="solverNow">更新法: Exact</div>
       </div>
     </div>
 
-    <div class="recipe-panel">
-      <div class="section-title">
-        <h2>プロセスレシピで変えやすいパラメータ</h2>
-        <div class="section-note">
-          ガス流量、圧力、パワー、バイアス、ウェハ温度などで実験的に動かしやすい量をまとめています。
-        </div>
-      </div>
-
-      <div class="controls">
-        <div class="control-card primary">
-          <label>
-            中性ラジカルフラックス Γn
-            <span class="value" id="valGammaN"></span>
-          </label>
-          <input type="range" id="gammaNLog" min="18" max="22" value="20" step="0.05" />
-          <div class="hint">単位: m^-2 s^-1。反応性中性種の表面入射フラックス。</div>
-        </div>
-
-        <div class="control-card primary">
-          <label>
-            表面温度 Ts
-            <span class="value" id="valTs"></span>
-          </label>
-          <input type="range" id="ts" min="250" max="900" value="450" step="1" />
-          <div class="hint">単位: K。熱脱離を Arrhenius 型で強く変化させます。</div>
-        </div>
-
-        <div class="control-card primary">
-          <label>
-            シース端電子密度 ne
-            <span class="value" id="valNe"></span>
-          </label>
-          <input type="range" id="neLog" min="14" max="18" value="16" step="0.05" />
-          <div class="hint">単位: m^-3。Bohm flux を通じてイオンフラックスを変えます。</div>
-        </div>
-
-        <div class="control-card primary">
-          <label>
-            電子温度 Te
-            <span class="value" id="valTe"></span>
-          </label>
-          <input type="range" id="te" min="0.5" max="10" value="3.0" step="0.1" />
-          <div class="hint">単位: eV。イオン音速 cs = sqrt(e Te / mi) に効きます。</div>
-        </div>
-
-        <div class="control-card primary">
-          <label>
-            入射イオンエネルギー Ei
-            <span class="value" id="valEi"></span>
-          </label>
-          <input type="range" id="ei" min="0" max="300" value="80" step="1" />
-          <div class="hint">単位: eV。バイアスで変化する代表的なイオン入射エネルギー。</div>
-        </div>
-
-        <div class="control-card primary">
-          <label>
-            シミュレーション加速率
-            <span class="value" id="valSpeed"></span>
-          </label>
-          <input type="range" id="speedLog" min="-1.5" max="4" value="-1" step="0.05" />
-          <div class="hint">デフォルトは 0.1x。物理式は変えず、画面上の進行速度だけを変えます。</div>
-        </div>
-
-        <div class="control-card primary">
-          <label>
-            表示時間窓
-            <span class="value" id="valWindow"></span>
-          </label>
-          <input type="range" id="timeWindow" min="0.5" max="120" value="2" step="0.5" />
-          <div class="hint">デフォルトは 2 s。短時間の立ち上がりと粒子の入射を見やすくします。</div>
-        </div>
-
-        <div class="control-card primary">
-          <label>
-            可視化粒子密度
-            <span class="value" id="valVisualFlux"></span>
-          </label>
-          <input type="range" id="visualFlux" min="0.3" max="5.0" value="2.2" step="0.1" />
-          <div class="hint">ODE には影響しません。ラジカルやイオンが降る見た目だけを調整します。</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="details-grid">
-      <details>
-        <summary>表面・材料パラメータ</summary>
+    <div class="details-stack">
+      <details open>
+        <summary>プラズマ状態パラメータ</summary>
         <div class="details-body">
           <div class="controls">
-            <div class="control-card">
+            <div class="control-card primary">
               <label>
-                表面サイト密度 Ns
-                <span class="value" id="valNs"></span>
+                中性ラジカルフラックス Γn
+                <span class="value" id="valGammaN"></span>
               </label>
-              <input type="range" id="nsLog" min="18.5" max="19.5" value="19.0" step="0.02" />
-              <div class="hint">単位: m^-2。1 ML のサイト数。典型値は 1e19 m^-2 程度。</div>
+              <input type="range" id="gammaNLog" min="18" max="22" value="20" step="0.05" />
+              <div class="hint">単位: m^-2 s^-1。反応性中性種の表面入射フラックス。</div>
             </div>
 
-            <div class="control-card">
+            <div class="control-card primary">
               <label>
-                スティッキング係数 s
-                <span class="value" id="valStick"></span>
+                表面温度 Ts
+                <span class="value" id="valTs"></span>
               </label>
-              <input type="range" id="stick" min="0.001" max="1.0" value="0.20" step="0.001" />
-              <div class="hint">無次元。空きサイトに到達した中性種が吸着する有効確率。</div>
+              <input type="range" id="ts" min="250" max="900" value="450" step="1" />
+              <div class="hint">単位: K。Polanyi-Wigner 項の Arrhenius 因子を通じて熱脱離に効きます。</div>
             </div>
 
-            <div class="control-card">
+            <div class="control-card primary">
               <label>
-                脱離エネルギー Edes
-                <span class="value" id="valEdes"></span>
+                シース端密度 n_se
+                <span class="value" id="valNse"></span>
               </label>
-              <input type="range" id="edes" min="0.20" max="2.50" value="1.00" step="0.01" />
-              <div class="hint">単位: eV。吸着種と表面の結合の強さを表す代表値。</div>
+              <input type="range" id="nseLog" min="14" max="18" value="16" step="0.05" />
+              <div class="hint">単位: m^-3。Γi = n_se sqrt(e Te / mi) によりイオンフラックスを定めます。</div>
             </div>
 
-            <div class="control-card">
+            <div class="control-card primary">
               <label>
-                前指数因子 ν
-                <span class="value" id="valNu"></span>
+                電子温度 Te
+                <span class="value" id="valTe"></span>
               </label>
-              <input type="range" id="nuLog" min="10" max="14" value="13" step="0.05" />
-              <div class="hint">単位: s^-1。分子振動周波数オーダーとして 1e13 s^-1 を初期値にしています。</div>
+              <input type="range" id="te" min="0.5" max="10" value="3.0" step="0.1" />
+              <div class="hint">単位: eV。Bohm 速度 uB = sqrt(e Te / mi) に効きます。</div>
+            </div>
+
+            <div class="control-card primary">
+              <label>
+                入射イオンエネルギー Ei
+                <span class="value" id="valEi"></span>
+              </label>
+              <input type="range" id="ei" min="0" max="300" value="80" step="1" />
+              <div class="hint">単位: eV。単一代表エネルギーでイオン誘起脱離収率を与えます。</div>
             </div>
           </div>
         </div>
       </details>
 
-      <details>
-        <summary>イオン誘起脱離モデル</summary>
-        <div class="details-body">
-          <div class="controls">
-            <div class="control-card">
-              <label>
-                イオン質量 mi
-                <span class="value" id="valMi"></span>
-              </label>
-              <input type="range" id="mi" min="4" max="131" value="40" step="1" />
-              <div class="hint">単位: amu。Ar+ なら約 40 amu、He+ なら約 4 amu。</div>
-            </div>
+      <div class="details-grid">
+        <details>
+          <summary>表面・材料パラメータ</summary>
+          <div class="details-body">
+            <div class="controls">
+              <div class="control-card">
+                <label>
+                  表面サイト密度 Ns
+                  <span class="value" id="valNs"></span>
+                </label>
+                <input type="range" id="nsLog" min="18.5" max="19.5" value="19.0" step="0.02" />
+                <div class="hint">単位: m^-2。1 ML のサイト数。典型値は 1e19 m^-2 程度。</div>
+              </div>
 
-            <div class="control-card">
-              <label>
-                脱離しきい値 Eth
-                <span class="value" id="valEth"></span>
-              </label>
-              <input type="range" id="eth" min="0" max="150" value="30" step="1" />
-              <div class="hint">単位: eV。Ei が Eth 以下のとき、イオン誘起脱離収率をゼロにします。</div>
-            </div>
+              <div class="control-card">
+                <label>
+                  スティッキング係数 s
+                  <span class="value" id="valStick"></span>
+                </label>
+                <input type="range" id="stick" min="0.001" max="1.0" value="0.20" step="0.001" />
+                <div class="hint">無次元。空きサイトに到達した中性種が吸着する有効確率。</div>
+              </div>
 
-            <div class="control-card">
-              <label>
-                最大イオン誘起脱離収率 Ymax
-                <span class="value" id="valYmax"></span>
-              </label>
-              <input type="range" id="ymax" min="0" max="2" value="0.30" step="0.01" />
-              <div class="hint">単位: adsorbate / ion。実材料では実験値、TRIM、MD 等で較正が必要です。</div>
+              <div class="control-card">
+                <label>
+                  基準脱離エネルギー Edes,0
+                  <span class="value" id="valEdes"></span>
+                </label>
+                <input type="range" id="edes" min="0.20" max="2.50" value="1.00" step="0.01" />
+                <div class="hint">単位: eV。coverage 依存を切れば一定障壁として使います。</div>
+              </div>
+
+              <div class="control-card">
+                <label>
+                  前指数因子 ν0
+                  <span class="value" id="valNu"></span>
+                </label>
+                <input type="range" id="nuLog" min="10" max="14" value="13" step="0.05" />
+                <div class="hint">単位: s^-1。n = 1 の既定では一次脱離の典型オーダーです。</div>
+              </div>
             </div>
           </div>
-        </div>
-      </details>
+        </details>
+
+        <details>
+          <summary>イオン誘起脱離モデル</summary>
+          <div class="details-body">
+            <div class="controls">
+              <div class="control-card">
+                <label>
+                  イオン質量 mi
+                  <span class="value" id="valMi"></span>
+                </label>
+                <input type="range" id="mi" min="4" max="131" value="40" step="1" />
+                <div class="hint">単位: amu。Ar+ なら約 40 amu、He+ なら約 4 amu。</div>
+              </div>
+
+              <div class="control-card">
+                <label>
+                  脱離しきい値 Eth
+                  <span class="value" id="valEth"></span>
+                </label>
+                <input type="range" id="eth" min="0" max="150" value="30" step="1" />
+                <div class="hint">単位: eV。Ei が Eth 以下なら Y(Ei) = 0 とします。</div>
+              </div>
+
+              <div class="control-card">
+                <label>
+                  最大イオン誘起脱離収率 Ymax
+                  <span class="value" id="valYmax"></span>
+                </label>
+                <input type="range" id="ymax" min="0" max="2.0" value="0.30" step="0.01" />
+                <div class="hint">単位: adsorbate / ion。実材料では較正が必要です。</div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div class="details-grid">
+        <details>
+          <summary>Polanyi-Wigner 詳細設定</summary>
+          <div class="details-body">
+            <div class="controls">
+              <div class="control-card">
+                <label>
+                  脱離次数 n
+                  <span class="value" id="valDesOrder"></span>
+                </label>
+                <input type="range" id="desOrder" min="1.0" max="3.0" value="1.0" step="0.1" />
+                <div class="hint">既定は n = 1。n = 1 かつ coverage 依存なしでは厳密更新を使います。</div>
+              </div>
+
+              <div class="control-card">
+                <label>
+                  Edes の coverage 係数 aE
+                  <span class="value" id="valAlphaE"></span>
+                </label>
+                <input type="range" id="alphaE" min="-0.60" max="0.60" value="0.00" step="0.01" />
+                <div class="hint">単位: eV / coverage。Edes_eff = Edes,0 + aE (Θ - 0.5)。</div>
+              </div>
+
+              <div class="control-card">
+                <label>
+                  ν の coverage 係数 aν
+                  <span class="value" id="valAlphaNu"></span>
+                </label>
+                <input type="range" id="alphaNu" min="-4.0" max="4.0" value="0.00" step="0.05" />
+                <div class="hint">無次元。ν_eff = ν0 exp[aν (Θ - 0.5)] の形で補正します。</div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>表示設定</summary>
+          <div class="details-body">
+            <div class="controls">
+              <div class="control-card">
+                <label>
+                  シミュレーション加速率
+                  <span class="value" id="valSpeed"></span>
+                </label>
+                <input type="range" id="speedLog" min="-1.5" max="4" value="-1" step="0.05" />
+                <div class="hint">既定は 0.1x。物理式は変えず、画面上の進行速度だけを変えます。</div>
+              </div>
+
+              <div class="control-card">
+                <label>
+                  表示時間窓
+                  <span class="value" id="valWindow"></span>
+                </label>
+                <input type="range" id="timeWindow" min="0.5" max="120" value="2" step="0.5" />
+                <div class="hint">単位: s。短時間の立ち上がりを見るなら 1 から 5 s が見やすいです。</div>
+              </div>
+
+              <div class="control-card">
+                <label>
+                  可視化粒子密度
+                  <span class="value" id="valVisualFlux"></span>
+                </label>
+                <input type="range" id="visualFlux" min="0.3" max="5.0" value="2.2" step="0.1" />
+                <div class="hint">ODE には影響しません。ラジカルやイオンが降る見た目だけを調整します。</div>
+              </div>
+
+              <div class="control-card check">
+                <div class="check-row">
+                  <input type="checkbox" id="showRates" />
+                  <label for="showRates" style="margin:0; display:inline; color:#dce4ed;">寄与レート補助パネルを表示</label>
+                </div>
+                <div class="hint">
+                  既定では非表示です。吸着を正、熱脱離とイオン誘起脱離を負として別パネルに出します。
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
     </div>
 
     <div class="main">
@@ -603,11 +658,20 @@
           <canvas id="timeChart"></canvas>
         </div>
 
+        <div class="subchart-wrap" id="ratePanel">
+          <div class="subchart-title">寄与レート補助パネル</div>
+          <canvas id="rateChart"></canvas>
+        </div>
+
         <div class="formula">
-          dΘ/dt = (s Γn / Ns) (1 - Θ) - [kdes + Y(Ei) Γi / Ns] Θ<br />
-          kdes = ν exp[-Edes / (kB Ts)]<br />
-          Γi = 0.61 ne sqrt(e Te / mi)<br />
-          Y(Ei) = Ymax [1 - Eth / Ei]^2, ただし Ei &gt; Eth のとき。Ei &lt;= Eth では Y = 0。
+dΘ/dt = A (1 - Θ) - Rth(Θ) - Bion Θ
+A = s Γn / Ns
+Rth(Θ) = νeff(Θ) exp[-Edes,eff(Θ) / (kB Ts)] Θ^n
+Γi = n_se sqrt(e Te / mi)
+Bion = Y(Ei) Γi / Ns
+Y(Ei) = Ymax [1 - Eth / Ei]^2, ただし Ei > Eth。Ei <= Eth では Y = 0。
+Edes,eff(Θ) = Edes,0 + aE (Θ - 0.5)
+νeff(Θ) = ν0 exp[aν (Θ - 0.5)]
         </div>
       </div>
 
@@ -624,25 +688,30 @@
 
         <div class="metrics">
           <div class="metric">
-            <div class="name">吸着レート A = s Γn / Ns</div>
+            <div class="name">吸着係数 A = s Γn / Ns</div>
             <div class="num" id="mA">-</div>
           </div>
+
           <div class="metric">
-            <div class="name">熱脱離 kdes</div>
-            <div class="num" id="mKdes">-</div>
+            <div class="name">熱脱離係数 kPW</div>
+            <div class="num" id="mKpw">-</div>
           </div>
+
           <div class="metric">
             <div class="name">Bohm イオンフラックス Γi</div>
             <div class="num" id="mGammaI">-</div>
           </div>
+
           <div class="metric">
-            <div class="name">イオン誘起脱離レート B</div>
-            <div class="num" id="mB">-</div>
+            <div class="name">イオン誘起脱離係数 Bion</div>
+            <div class="num" id="mBion">-</div>
           </div>
+
           <div class="metric">
             <div class="name">定常被覆率 Θss</div>
             <div class="num" id="mThetaSS">-</div>
           </div>
+
           <div class="metric">
             <div class="name">緩和時定数 τ</div>
             <div class="num" id="mTau">-</div>
@@ -658,8 +727,9 @@
     </div>
 
     <div class="note">
-      注意: このモデルは 0D の平均場モデルです。表面拡散、吸着サイトの不均一性、角度分布、イオンエネルギー分布関数、化学反応生成物の脱離、ラジカル再結合、シース電圧波形は含んでいません。
-      実験に合わせるには Ns、s、Edes、ν、Y(Ei) を対象材料とプロセス条件で較正してください。
+      注意: このモデルは 0D の平均場モデルです。表面拡散、サイト不均一の詳細分布、角度分布、IEDF、readsorption、
+      ラジカル再結合、RF シース波形は含んでいません。通常モードでは一次 Polanyi-Wigner 脱離を仮定し、
+      n = 1 かつ coverage 依存を切った場合に限って厳密更新を使います。実験に合わせるには Ns、s、Edes、ν、Y(Ei) を較正してください。
     </div>
   </div>
 
@@ -672,55 +742,91 @@
     let tPhys = 0.0;
     let running = true;
     let lastFrame = performance.now();
+    let lastSampleT = -1e9;
 
-    const chartTheta = [];
-    const chartThetaSS = [];
+    const history = {
+      theta: [],
+      thetaSS: [],
+      ads: [],
+      th: [],
+      ion: []
+    };
 
     const ui = {
       gammaNLog: document.getElementById("gammaNLog"),
+      ts: document.getElementById("ts"),
+      nseLog: document.getElementById("nseLog"),
+      te: document.getElementById("te"),
+      ei: document.getElementById("ei"),
+
       nsLog: document.getElementById("nsLog"),
       stick: document.getElementById("stick"),
-      ts: document.getElementById("ts"),
       edes: document.getElementById("edes"),
       nuLog: document.getElementById("nuLog"),
-      neLog: document.getElementById("neLog"),
-      te: document.getElementById("te"),
+
       mi: document.getElementById("mi"),
-      ei: document.getElementById("ei"),
       eth: document.getElementById("eth"),
       ymax: document.getElementById("ymax"),
+
+      desOrder: document.getElementById("desOrder"),
+      alphaE: document.getElementById("alphaE"),
+      alphaNu: document.getElementById("alphaNu"),
+
       speedLog: document.getElementById("speedLog"),
       timeWindow: document.getElementById("timeWindow"),
-      visualFlux: document.getElementById("visualFlux")
+      visualFlux: document.getElementById("visualFlux"),
+      showRates: document.getElementById("showRates")
     };
 
     const out = {
       valGammaN: document.getElementById("valGammaN"),
+      valTs: document.getElementById("valTs"),
+      valNse: document.getElementById("valNse"),
+      valTe: document.getElementById("valTe"),
+      valEi: document.getElementById("valEi"),
+
       valNs: document.getElementById("valNs"),
       valStick: document.getElementById("valStick"),
-      valTs: document.getElementById("valTs"),
       valEdes: document.getElementById("valEdes"),
       valNu: document.getElementById("valNu"),
-      valNe: document.getElementById("valNe"),
-      valTe: document.getElementById("valTe"),
+
       valMi: document.getElementById("valMi"),
-      valEi: document.getElementById("valEi"),
       valEth: document.getElementById("valEth"),
       valYmax: document.getElementById("valYmax"),
+
+      valDesOrder: document.getElementById("valDesOrder"),
+      valAlphaE: document.getElementById("valAlphaE"),
+      valAlphaNu: document.getElementById("valAlphaNu"),
+
       valSpeed: document.getElementById("valSpeed"),
       valWindow: document.getElementById("valWindow"),
       valVisualFlux: document.getElementById("valVisualFlux"),
+
       thetaNow: document.getElementById("thetaNow"),
+      solverNow: document.getElementById("solverNow"),
+
       mA: document.getElementById("mA"),
-      mKdes: document.getElementById("mKdes"),
+      mKpw: document.getElementById("mKpw"),
       mGammaI: document.getElementById("mGammaI"),
-      mB: document.getElementById("mB"),
+      mBion: document.getElementById("mBion"),
       mThetaSS: document.getElementById("mThetaSS"),
       mTau: document.getElementById("mTau")
     };
 
+    const pauseBtn = document.getElementById("pauseBtn");
+    const resetBtn = document.getElementById("resetBtn");
+    const stepBtn = document.getElementById("stepBtn");
+    const ratePanel = document.getElementById("ratePanel");
+
+    const surfaceCanvas = document.getElementById("surfaceCanvas");
+    const sctx = surfaceCanvas.getContext("2d");
+
     function pow10(x) {
       return Math.pow(10, x);
+    }
+
+    function clamp(x, lo, hi) {
+      return Math.max(lo, Math.min(hi, x));
     }
 
     function fmtSci(x, unit = "") {
@@ -739,512 +845,751 @@
     }
 
     function readParams() {
-      const gammaN = pow10(parseFloat(ui.gammaNLog.value));
-      const Ns = pow10(parseFloat(ui.nsLog.value));
-      const s = parseFloat(ui.stick.value);
-      const Ts = parseFloat(ui.ts.value);
-      const Edes = parseFloat(ui.edes.value);
-      const nu = pow10(parseFloat(ui.nuLog.value));
-      const ne = pow10(parseFloat(ui.neLog.value));
-      const Te = parseFloat(ui.te.value);
-      const miAmu = parseFloat(ui.mi.value);
-      const Ei = parseFloat(ui.ei.value);
-      const Eth = parseFloat(ui.eth.value);
-      const Ymax = parseFloat(ui.ymax.value);
-      const speed = pow10(parseFloat(ui.speedLog.value));
-      const timeWindow = parseFloat(ui.timeWindow.value);
-      const visualFlux = parseFloat(ui.visualFlux.value);
-
       return {
-        gammaN,
-        Ns,
-        s,
-        Ts,
-        Edes,
-        nu,
-        ne,
-        Te,
-        miAmu,
-        Ei,
-        Eth,
-        Ymax,
-        speed,
-        timeWindow,
-        visualFlux
+        gammaNLog: parseFloat(ui.gammaNLog.value),
+        gammaN: pow10(parseFloat(ui.gammaNLog.value)),
+        Ts: parseFloat(ui.ts.value),
+        nseLog: parseFloat(ui.nseLog.value),
+        nse: pow10(parseFloat(ui.nseLog.value)),
+        Te: parseFloat(ui.te.value),
+        Ei: parseFloat(ui.ei.value),
+
+        Ns: pow10(parseFloat(ui.nsLog.value)),
+        s: parseFloat(ui.stick.value),
+        Edes0: parseFloat(ui.edes.value),
+        nu0: pow10(parseFloat(ui.nuLog.value)),
+
+        miAmu: parseFloat(ui.mi.value),
+        mi: parseFloat(ui.mi.value) * amu,
+        Eth: parseFloat(ui.eth.value),
+        Ymax: parseFloat(ui.ymax.value),
+
+        n: parseFloat(ui.desOrder.value),
+        aE: parseFloat(ui.alphaE.value),
+        aNu: parseFloat(ui.alphaNu.value),
+
+        speed: pow10(parseFloat(ui.speedLog.value)),
+        timeWindow: parseFloat(ui.timeWindow.value),
+        visualFlux: parseFloat(ui.visualFlux.value),
+        showRates: ui.showRates.checked
       };
     }
 
-    function ionYield(Ei, Eth, Ymax) {
-      if (Ei <= Eth || Ei <= 0 || Ymax <= 0) return 0;
-      const x = 1 - Eth / Ei;
-      return Ymax * x * x;
+    function canUseExact(p) {
+      return Math.abs(p.n - 1.0) < 1e-12 && Math.abs(p.aE) < 1e-12 && Math.abs(p.aNu) < 1e-12;
     }
 
-    function calcModel(p) {
+    function ionYield(p) {
+      if (p.Ei <= p.Eth || p.Ymax <= 0) return 0;
+      const f = 1 - p.Eth / p.Ei;
+      return p.Ymax * f * f;
+    }
+
+    function bohmSpeed(p) {
+      return Math.sqrt(elementaryCharge * p.Te / p.mi);
+    }
+
+    function gammaI(p) {
+      return p.nse * bohmSpeed(p);
+    }
+
+    function EdesEff(thetaLocal, p) {
+      return Math.max(0.05, p.Edes0 + p.aE * (thetaLocal - 0.5));
+    }
+
+    function nuEff(thetaLocal, p) {
+      return p.nu0 * Math.exp(p.aNu * (thetaLocal - 0.5));
+    }
+
+    function ratesAt(thetaLocal, p) {
+      const th = clamp(thetaLocal, 0, 1);
       const A = p.s * p.gammaN / p.Ns;
+      const Gi = gammaI(p);
+      const Y = ionYield(p);
+      const Bion = Y * Gi / p.Ns;
 
-      const exponent = -p.Edes / (kB_eVK * p.Ts);
-      const kdes = p.nu * Math.exp(exponent);
+      const Eeff = EdesEff(th, p);
+      const nueff = nuEff(th, p);
+      const kPW = nueff * Math.exp(-Eeff / (kB_eVK * p.Ts));
 
-      const miKg = p.miAmu * amu;
-      const cs = Math.sqrt((p.Te * elementaryCharge) / miKg);
-      const gammaI = 0.61 * p.ne * cs;
+      const Rads = A * (1 - th);
+      const Rth = kPW * Math.pow(th, p.n);
+      const Rion = Bion * th;
+      const dtheta = Rads - Rth - Rion;
 
-      const Y = ionYield(p.Ei, p.Eth, p.Ymax);
-      const B = Y * gammaI / p.Ns;
-
-      const loss = kdes + B;
-      const rate = A + loss;
-      const thetaSS = rate > 0 ? A / rate : 0;
-      const tau = rate > 0 ? 1 / rate : Infinity;
-
-      return { A, kdes, cs, gammaI, Y, B, loss, rate, thetaSS, tau };
+      return {
+        A,
+        Gi,
+        Y,
+        Bion,
+        Eeff,
+        nueff,
+        kPW,
+        Rads,
+        Rth,
+        Rion,
+        dtheta
+      };
     }
 
-    function updateLabels(p, m) {
-      out.valGammaN.textContent = fmtSci(p.gammaN, "m^-2 s^-1");
-      out.valNs.textContent = fmtSci(p.Ns, "m^-2");
-      out.valStick.textContent = fmtFixed(p.s, 3);
-      out.valTs.textContent = fmtFixed(p.Ts, 0, "K");
-      out.valEdes.textContent = fmtFixed(p.Edes, 2, "eV");
-      out.valNu.textContent = fmtSci(p.nu, "s^-1");
-      out.valNe.textContent = fmtSci(p.ne, "m^-3");
-      out.valTe.textContent = fmtFixed(p.Te, 1, "eV");
-      out.valMi.textContent = fmtFixed(p.miAmu, 0, "amu");
-      out.valEi.textContent = fmtFixed(p.Ei, 0, "eV");
-      out.valEth.textContent = fmtFixed(p.Eth, 0, "eV");
-      out.valYmax.textContent = fmtFixed(p.Ymax, 2);
-      out.valSpeed.textContent = fmtSci(p.speed, "x");
-      out.valWindow.textContent = fmtFixed(p.timeWindow, 1, "s");
-      out.valVisualFlux.textContent = fmtFixed(p.visualFlux, 1, "x");
-
-      out.thetaNow.textContent = theta.toFixed(3);
-      out.mA.textContent = fmtSci(m.A, "s^-1");
-      out.mKdes.textContent = fmtSci(m.kdes, "s^-1");
-      out.mGammaI.textContent = fmtSci(m.gammaI, "m^-2 s^-1");
-      out.mB.textContent = fmtSci(m.B, "s^-1");
-      out.mThetaSS.textContent = fmtFixed(m.thetaSS, 4);
-      out.mTau.textContent = Number.isFinite(m.tau) ? fmtSci(m.tau, "s") : "∞";
+    function exactStep(theta0, dt, p) {
+      const r = ratesAt(theta0, p);
+      const lambda = r.A + r.kPW + r.Bion;
+      if (lambda <= 0) return clamp(theta0, 0, 1);
+      const thetaSS = r.A / lambda;
+      return clamp(thetaSS + (theta0 - thetaSS) * Math.exp(-lambda * dt), 0, 1);
     }
 
-    const chartCtx = document.getElementById("timeChart").getContext("2d");
-    Chart.defaults.color = "#aab3bd";
-    Chart.defaults.borderColor = "#303743";
+    function rk4Step(theta0, dt, p) {
+      const f = (th) => ratesAt(th, p).dtheta;
+      const r0 = ratesAt(theta0, p);
+      const scale = Math.max(r0.A + r0.kPW + r0.Bion, 1e-6);
+      const nSub = Math.min(300, Math.max(1, Math.ceil(dt * scale / 0.08)));
+      const h = dt / nSub;
 
-    const chart = new Chart(chartCtx, {
+      let y = theta0;
+      for (let i = 0; i < nSub; i++) {
+        const k1 = f(y);
+        const k2 = f(clamp(y + 0.5 * h * k1, 0, 1));
+        const k3 = f(clamp(y + 0.5 * h * k2, 0, 1));
+        const k4 = f(clamp(y + h * k3, 0, 1));
+        y = clamp(y + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4), 0, 1);
+      }
+      return y;
+    }
+
+    function findSteadyTheta(p) {
+      let lo = 0;
+      let hi = 1;
+      let flo = ratesAt(lo, p).dtheta;
+      let fhi = ratesAt(hi, p).dtheta;
+
+      if (flo === 0) return lo;
+      if (fhi === 0) return hi;
+
+      if (!(flo > 0 && fhi < 0)) {
+        return clamp(theta, 0, 1);
+      }
+
+      for (let i = 0; i < 64; i++) {
+        const mid = 0.5 * (lo + hi);
+        const fm = ratesAt(mid, p).dtheta;
+        if (fm > 0) {
+          lo = mid;
+        } else {
+          hi = mid;
+        }
+      }
+      return 0.5 * (lo + hi);
+    }
+
+    function estimateTau(p, thetaSS) {
+      if (canUseExact(p)) {
+        const r = ratesAt(thetaSS, p);
+        const lambda = r.A + r.kPW + r.Bion;
+        return lambda > 0 ? 1 / lambda : Infinity;
+      }
+
+      const h = 1e-4;
+      const t1 = clamp(thetaSS - h, 0, 1);
+      const t2 = clamp(thetaSS + h, 0, 1);
+      const f1 = ratesAt(t1, p).dtheta;
+      const f2 = ratesAt(t2, p).dtheta;
+      const dfdTheta = (f2 - f1) / Math.max(t2 - t1, 1e-12);
+
+      if (dfdTheta < 0) return -1 / dfdTheta;
+      return Infinity;
+    }
+
+    function advancePhysical(dt, p) {
+      if (canUseExact(p)) {
+        theta = exactStep(theta, dt, p);
+      } else {
+        theta = rk4Step(theta, dt, p);
+      }
+      tPhys += dt;
+    }
+
+    function sampleInterval(p) {
+      return Math.max(0.004, p.timeWindow / 280);
+    }
+
+    function pushHistory(p) {
+      const thetaSS = findSteadyTheta(p);
+      const r = ratesAt(theta, p);
+
+      history.theta.push({ x: tPhys, y: theta });
+      history.thetaSS.push({ x: tPhys, y: thetaSS });
+      history.ads.push({ x: tPhys, y: r.Rads });
+      history.th.push({ x: tPhys, y: -r.Rth });
+      history.ion.push({ x: tPhys, y: -r.Rion });
+
+      const xmin = Math.max(0, tPhys - p.timeWindow * 1.20);
+
+      for (const key of Object.keys(history)) {
+        while (history[key].length > 2 && history[key][0].x < xmin) {
+          history[key].shift();
+        }
+      }
+    }
+
+    const chartCommonScales = {
+      x: {
+        type: "linear",
+        min: 0,
+        max: 2,
+        title: { display: true, text: "t [s]", color: "#b8c1cc" },
+        grid: { color: "rgba(255,255,255,0.06)" },
+        ticks: { color: "#b8c1cc" }
+      }
+    };
+
+    const timeChart = new Chart(document.getElementById("timeChart"), {
       type: "line",
       data: {
         datasets: [
           {
             label: "Θ(t)",
-            data: chartTheta,
+            data: [],
             borderColor: "#00d7ff",
-            backgroundColor: "rgba(0, 215, 255, 0.12)",
-            fill: true,
-            borderWidth: 2,
             pointRadius: 0,
-            tension: 0.16
+            borderWidth: 2.0,
+            tension: 0.15
           },
           {
             label: "Θss",
-            data: chartThetaSS,
+            data: [],
             borderColor: "#59e38f",
-            backgroundColor: "rgba(89, 227, 143, 0.0)",
-            fill: false,
-            borderWidth: 1.5,
-            borderDash: [6, 5],
             pointRadius: 0,
-            tension: 0
+            borderWidth: 1.6,
+            borderDash: [6, 5],
+            tension: 0.0
           }
         ]
       },
       options: {
+        animation: false,
         responsive: true,
         maintainAspectRatio: false,
-        animation: false,
         parsing: false,
-        scales: {
-          x: {
-            type: "linear",
-            title: { display: true, text: "Physical time [s]" },
-            min: 0,
-            max: 2
-          },
-          y: {
-            title: { display: true, text: "Coverage Θ [ML fraction]" },
-            min: 0,
-            max: 1
-          }
-        },
+        interaction: { mode: "index", intersect: false },
         plugins: {
           legend: {
-            labels: {
-              color: "#dbe4ee"
-            }
-          },
-          tooltip: {
-            mode: "nearest",
-            intersect: false
+            labels: { color: "#dbe4ee" }
+          }
+        },
+        scales: {
+          ...chartCommonScales,
+          y: {
+            min: 0,
+            max: 1,
+            title: { display: true, text: "Θ [-]", color: "#b8c1cc" },
+            grid: { color: "rgba(255,255,255,0.06)" },
+            ticks: { color: "#b8c1cc" }
           }
         }
       }
     });
 
-    const surfaceCanvas = document.getElementById("surfaceCanvas");
-    const sctx = surfaceCanvas.getContext("2d");
-
-    const cols = 25;
-    const rows = 6;
-    const totalSites = cols * rows;
-    let sites = new Array(totalSites).fill(0);
-    let particles = [];
-
-    function sitePosition(index) {
-      const marginX = 24;
-      const gridW = surfaceCanvas.width - 2 * marginX;
-      const cellW = gridW / cols;
-      const cellH = 22;
-      const gridH = rows * cellH;
-      const startY = surfaceCanvas.height - gridH - 28;
-      const c = index % cols;
-      const r = Math.floor(index / cols);
-
-      return {
-        x: marginX + c * cellW + cellW / 2,
-        y: startY + r * cellH + cellH / 2,
-        cellX: marginX + c * cellW,
-        cellY: startY + r * cellH,
-        cellW,
-        cellH,
-        startY
-      };
-    }
-
-    class Particle {
-      constructor(x, y, vx, vy, type, life = 1.0) {
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.type = type;
-        this.life = life;
-      }
-    }
-
-    function syncSitesToTheta() {
-      const target = Math.round(theta * totalSites);
-      let occupied = sites.reduce((a, b) => a + b, 0);
-
-      while (occupied < target) {
-        const empty = [];
-        for (let i = 0; i < sites.length; i++) {
-          if (sites[i] === 0) empty.push(i);
-        }
-        if (empty.length === 0) break;
-        const idx = empty[Math.floor(Math.random() * empty.length)];
-        sites[idx] = 1;
-        occupied += 1;
-      }
-
-      while (occupied > target) {
-        const filled = [];
-        for (let i = 0; i < sites.length; i++) {
-          if (sites[i] === 1) filled.push(i);
-        }
-        if (filled.length === 0) break;
-        const idx = filled[Math.floor(Math.random() * filled.length)];
-        sites[idx] = 0;
-        occupied -= 1;
-
-        const pos = sitePosition(idx);
-        particles.push(new Particle(
-          pos.x,
-          pos.y,
-          (Math.random() - 0.5) * 1.4,
-          -1.2 - Math.random() * 1.8,
-          "desorbed",
-          1
-        ));
-      }
-    }
-
-    function spawnParticles(p, m, elapsedReal) {
-      const visual = p.visualFlux;
-
-      const radicalLevel = Math.log10(1 + p.gammaN / 1e18);
-      const ionLevel = Math.log10(1 + m.gammaI / 1e14);
-
-      const radicalRateVisual = visual * (6 + 10 * radicalLevel);
-      const ionRateVisual = visual * (2 + 8 * ionLevel);
-
-      const radicalMean = radicalRateVisual * elapsedReal;
-      const ionMean = ionRateVisual * elapsedReal;
-
-      const maxRadicalsPerFrame = 5;
-      const maxIonsPerFrame = 4;
-
-      const nRadicals = Math.min(maxRadicalsPerFrame, poissonLike(radicalMean));
-      const nIons = Math.min(maxIonsPerFrame, poissonLike(ionMean));
-
-      for (let i = 0; i < nRadicals; i++) {
-        particles.push(new Particle(
-          Math.random() * surfaceCanvas.width,
-          -8,
-          (Math.random() - 0.5) * 0.7,
-          2.0 + Math.random() * 1.8,
-          "radical",
-          1
-        ));
-      }
-
-      for (let i = 0; i < nIons; i++) {
-        particles.push(new Particle(
-          Math.random() * surfaceCanvas.width,
-          -8,
-          (Math.random() - 0.5) * 0.18,
-          4.2 + Math.random() * 2.1,
-          "ion",
-          1
-        ));
-      }
-    }
-
-    function poissonLike(mean) {
-      if (mean <= 0) return 0;
-
-      const base = Math.floor(mean);
-      const frac = mean - base;
-      let n = base;
-
-      if (Math.random() < frac) n += 1;
-
-      return n;
-    }
-
-    function drawSurface(p, m) {
-      sctx.fillStyle = "rgba(8, 10, 14, 0.35)";
-      sctx.fillRect(0, 0, surfaceCanvas.width, surfaceCanvas.height);
-
-      const examplePos = sitePosition(0);
-      const impactY = examplePos.startY - 10;
-
-      sctx.strokeStyle = "#303743";
-      sctx.lineWidth = 1;
-      sctx.beginPath();
-      sctx.moveTo(18, impactY);
-      sctx.lineTo(surfaceCanvas.width - 18, impactY);
-      sctx.stroke();
-
-      sctx.fillStyle = "#7f8994";
-      sctx.font = "12px system-ui, sans-serif";
-      sctx.fillText("sheath → surface", 22, 24);
-
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const q = particles[i];
-        q.x += q.vx;
-        q.y += q.vy;
-
-        if (q.type === "radical" && q.y >= impactY) {
-          particles.splice(i, 1);
-          continue;
-        }
-
-        if (q.type === "ion" && q.y >= impactY) {
-          for (let k = 0; k < 7; k++) {
-            particles.push(new Particle(
-              q.x,
-              impactY,
-              (Math.random() - 0.5) * 4,
-              -Math.random() * 3.2,
-              "spark",
-              1
-            ));
+    const rateChart = new Chart(document.getElementById("rateChart"), {
+      type: "line",
+      data: {
+        datasets: [
+          {
+            label: "吸着",
+            data: [],
+            borderColor: "#59e38f",
+            pointRadius: 0,
+            borderWidth: 1.6,
+            tension: 0.15
+          },
+          {
+            label: "熱脱離",
+            data: [],
+            borderColor: "#ffad33",
+            pointRadius: 0,
+            borderWidth: 1.6,
+            tension: 0.15
+          },
+          {
+            label: "イオン誘起脱離",
+            data: [],
+            borderColor: "#ff4dff",
+            pointRadius: 0,
+            borderWidth: 1.6,
+            tension: 0.15
           }
-          particles.splice(i, 1);
-          continue;
-        }
-
-        if (q.type === "spark") {
-          q.life -= 0.08;
-          q.vy += 0.03;
-          if (q.life <= 0) {
-            particles.splice(i, 1);
-            continue;
+        ]
+      },
+      options: {
+        animation: false,
+        responsive: true,
+        maintainAspectRatio: false,
+        parsing: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: {
+            labels: {
+              color: "#c8d1db",
+              boxWidth: 12,
+              boxHeight: 12
+            }
+          }
+        },
+        scales: {
+          ...chartCommonScales,
+          y: {
+            min: -1,
+            max: 1,
+            title: { display: true, text: "rate [s^-1]", color: "#b8c1cc" },
+            grid: { color: "rgba(255,255,255,0.06)" },
+            ticks: {
+              color: "#b8c1cc",
+              callback: (v) => Number(v).toExponential(1)
+            }
           }
         }
+      }
+    });
 
-        if (q.type === "desorbed") {
-          q.life -= 0.01;
-          if (q.y < -10 || q.life <= 0) {
-            particles.splice(i, 1);
-            continue;
-          }
+    function updateRatePanelVisibility() {
+      ratePanel.style.display = ui.showRates.checked ? "block" : "none";
+      timeChart.resize();
+      rateChart.resize();
+    }
+
+    function updateChartData(p) {
+      const xmin = Math.max(0, tPhys - p.timeWindow);
+      const xmax = Math.max(p.timeWindow, tPhys);
+
+      timeChart.data.datasets[0].data = history.theta;
+      timeChart.data.datasets[1].data = history.thetaSS;
+      timeChart.options.scales.x.min = xmin;
+      timeChart.options.scales.x.max = xmax;
+      timeChart.update("none");
+
+      rateChart.data.datasets[0].data = history.ads;
+      rateChart.data.datasets[1].data = history.th;
+      rateChart.data.datasets[2].data = history.ion;
+      rateChart.options.scales.x.min = xmin;
+      rateChart.options.scales.x.max = xmax;
+
+      let maxAbs = 1e-6;
+      for (const arr of [history.ads, history.th, history.ion]) {
+        for (let i = Math.max(0, arr.length - 320); i < arr.length; i++) {
+          maxAbs = Math.max(maxAbs, Math.abs(arr[i].y));
         }
+      }
+      rateChart.options.scales.y.min = -1.15 * maxAbs;
+      rateChart.options.scales.y.max =  1.15 * maxAbs;
+      rateChart.update("none");
+    }
 
-        if (q.y > surfaceCanvas.height + 20 || q.x < -30 || q.x > surfaceCanvas.width + 30) {
-          particles.splice(i, 1);
-          continue;
+    const surfaceModel = {
+      cols: 28,
+      rows: 12,
+      sites: [],
+      occupied: [],
+      occupiedCount: 0,
+      slabY: 208,
+      slabH: 96,
+      left: 36,
+      right: 524
+    };
+
+    const particles = {
+      radicals: [],
+      ions: [],
+      desorbates: [],
+      radAcc: 0,
+      ionAcc: 0,
+      desAcc: 0
+    };
+
+    function initSurfaceSites() {
+      surfaceModel.sites = [];
+      const top = surfaceModel.slabY + 14;
+      const bottom = surfaceModel.slabY + surfaceModel.slabH - 16;
+      const left = surfaceModel.left;
+      const right = surfaceModel.right;
+
+      for (let j = 0; j < surfaceModel.rows; j++) {
+        for (let i = 0; i < surfaceModel.cols; i++) {
+          const x = left + (right - left) * (i + 0.5) / surfaceModel.cols;
+          const y = top + (bottom - top) * (j + 0.5) / surfaceModel.rows;
+          surfaceModel.sites.push({ x, y });
         }
+      }
+      surfaceModel.occupied = new Array(surfaceModel.sites.length).fill(false);
+      surfaceModel.occupiedCount = 0;
+    }
 
-        sctx.beginPath();
+    function syncOccupancy() {
+      const total = surfaceModel.sites.length;
+      const target = Math.round(theta * total);
+      let diff = target - surfaceModel.occupiedCount;
 
-        if (q.type === "radical") {
-          sctx.fillStyle = "#9beeff";
-          sctx.arc(q.x, q.y, 3, 0, Math.PI * 2);
-        } else if (q.type === "ion") {
-          sctx.fillStyle = "#ff4dff";
-          sctx.arc(q.x, q.y, 2.4, 0, Math.PI * 2);
-          sctx.fillRect(q.x - 1, q.y - 14, 2, 12);
-        } else if (q.type === "spark") {
-          sctx.fillStyle = `rgba(255, 77, 255, ${q.life})`;
-          sctx.arc(q.x, q.y, 1.8, 0, Math.PI * 2);
-        } else if (q.type === "desorbed") {
-          sctx.fillStyle = "#ffad33";
-          sctx.arc(q.x, q.y, 2.6, 0, Math.PI * 2);
+      let tries = 0;
+      while (diff > 0 && tries < total * 12) {
+        const idx = Math.floor(Math.random() * total);
+        if (!surfaceModel.occupied[idx]) {
+          surfaceModel.occupied[idx] = true;
+          surfaceModel.occupiedCount++;
+          diff--;
         }
-
-        sctx.fill();
+        tries++;
       }
 
-      for (let i = 0; i < totalSites; i++) {
-        const pos = sitePosition(i);
+      tries = 0;
+      while (diff < 0 && tries < total * 12) {
+        const idx = Math.floor(Math.random() * total);
+        if (surfaceModel.occupied[idx]) {
+          surfaceModel.occupied[idx] = false;
+          surfaceModel.occupiedCount--;
+          diff++;
+        }
+        tries++;
+      }
+    }
 
-        sctx.strokeStyle = "#303743";
-        sctx.lineWidth = 1;
-        sctx.strokeRect(pos.cellX, pos.cellY, pos.cellW, pos.cellH);
+    function spawnVisualParticles(dt, p) {
+      const r = ratesAt(theta, p);
 
-        if (sites[i] === 1) {
-          sctx.fillStyle = "#00d7ff";
-          sctx.shadowBlur = 10;
-          sctx.shadowColor = "#00d7ff";
-          sctx.fillRect(pos.cellX + 2, pos.cellY + 2, pos.cellW - 4, pos.cellH - 4);
-          sctx.shadowBlur = 0;
+      const gammaNorm = (p.gammaNLog - 18) / 4;
+      const nseNorm = (p.nseLog - 14) / 4;
+      const teNorm = (p.Te - 0.5) / 9.5;
+
+      particles.radAcc += dt * p.visualFlux * (6 + 36 * gammaNorm);
+      particles.ionAcc += dt * p.visualFlux * (3 + 28 * (0.65 * nseNorm + 0.35 * teNorm));
+
+      const totalLoss = Math.abs(r.Rth) + Math.abs(r.Rion);
+      const totalDrive = Math.max(r.Rads + totalLoss, 1e-12);
+      const desNorm = clamp(totalLoss / totalDrive, 0, 1);
+      particles.desAcc += dt * p.visualFlux * (2 + 24 * desNorm);
+
+      while (particles.radAcc >= 1) {
+        particles.radicals.push({
+          x: 22 + Math.random() * (surfaceCanvas.width - 44),
+          y: -20 - Math.random() * 50,
+          vy: 60 + Math.random() * 50,
+          vx: -8 + 16 * Math.random(),
+          r: 2.4 + Math.random() * 1.3
+        });
+        particles.radAcc -= 1;
+      }
+
+      while (particles.ionAcc >= 1) {
+        particles.ions.push({
+          x: 22 + Math.random() * (surfaceCanvas.width - 44),
+          y: -20 - Math.random() * 65,
+          vy: 105 + Math.random() * 75,
+          vx: -3 + 6 * Math.random(),
+          r: 2.5 + Math.random() * 1.2
+        });
+        particles.ionAcc -= 1;
+      }
+
+      while (particles.desAcc >= 1) {
+        const idx = Math.floor(Math.random() * surfaceModel.sites.length);
+        const site = surfaceModel.sites[idx];
+        particles.desorbates.push({
+          x: site.x,
+          y: surfaceModel.slabY + 2 + Math.random() * 8,
+          vy: -(60 + Math.random() * 80),
+          vx: -25 + 50 * Math.random(),
+          r: 2.0 + Math.random() * 1.6,
+          life: 0.7 + Math.random() * 0.5
+        });
+        particles.desAcc -= 1;
+      }
+    }
+
+    function updateVisualParticles(dt) {
+      const yLimit = surfaceModel.slabY + 4;
+
+      for (const arr of [particles.radicals, particles.ions, particles.desorbates]) {
+        for (let i = arr.length - 1; i >= 0; i--) {
+          const p = arr[i];
+          p.x += p.vx * dt;
+          p.y += p.vy * dt;
+
+          if (p.life !== undefined) p.life -= dt;
+
+          if (arr === particles.radicals || arr === particles.ions) {
+            if (p.y > yLimit) {
+              arr.splice(i, 1);
+              continue;
+            }
+          } else {
+            if (p.life <= 0 || p.y < -30 || p.x < -30 || p.x > surfaceCanvas.width + 30) {
+              arr.splice(i, 1);
+              continue;
+            }
+          }
+
+          if (p.x < -30 || p.x > surfaceCanvas.width + 30 || p.y > surfaceCanvas.height + 30) {
+            arr.splice(i, 1);
+          }
+        }
+      }
+
+      if (particles.radicals.length > 500) particles.radicals.splice(0, particles.radicals.length - 500);
+      if (particles.ions.length > 350) particles.ions.splice(0, particles.ions.length - 350);
+      if (particles.desorbates.length > 280) particles.desorbates.splice(0, particles.desorbates.length - 280);
+    }
+
+    function drawSurfacePanel(p) {
+      const ctx = sctx;
+      const w = surfaceCanvas.width;
+      const h = surfaceCanvas.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, "#06080c");
+      grad.addColorStop(0.65, "#0a0d14");
+      grad.addColorStop(1, "#121825");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = "rgba(255,255,255,0.03)";
+      for (let i = 0; i < 22; i++) {
+        ctx.fillRect(0, i * 15, w, 1);
+      }
+
+      ctx.fillStyle = "#17202d";
+      ctx.fillRect(24, surfaceModel.slabY, w - 48, surfaceModel.slabH);
+
+      ctx.strokeStyle = "#3a4759";
+      ctx.lineWidth = 1.2;
+      ctx.strokeRect(24, surfaceModel.slabY, w - 48, surfaceModel.slabH);
+
+      ctx.strokeStyle = "#6b7a8e";
+      ctx.beginPath();
+      ctx.moveTo(24, surfaceModel.slabY);
+      ctx.lineTo(w - 24, surfaceModel.slabY);
+      ctx.stroke();
+
+      for (let i = 0; i < surfaceModel.sites.length; i++) {
+        const site = surfaceModel.sites[i];
+        const occ = surfaceModel.occupied[i];
+
+        ctx.beginPath();
+        ctx.arc(site.x, site.y, 4.0, 0, 2 * Math.PI);
+
+        if (occ) {
+          ctx.fillStyle = "#00d7ff";
+          ctx.shadowColor = "#00d7ff";
+          ctx.shadowBlur = 8;
         } else {
-          sctx.fillStyle = "rgba(255,255,255,0.025)";
-          sctx.fillRect(pos.cellX + 2, pos.cellY + 2, pos.cellW - 4, pos.cellH - 4);
+          ctx.fillStyle = "#203042";
+          ctx.shadowBlur = 0;
         }
+        ctx.fill();
+      }
+      ctx.shadowBlur = 0;
+
+      for (const p0 of particles.radicals) {
+        ctx.beginPath();
+        ctx.arc(p0.x, p0.y, p0.r, 0, 2 * Math.PI);
+        ctx.fillStyle = "#9beeff";
+        ctx.fill();
       }
 
-      const barX = 24;
-      const barY = surfaceCanvas.height - 18;
-      const barW = surfaceCanvas.width - 48;
-      const barH = 6;
-
-      sctx.fillStyle = "#303743";
-      sctx.fillRect(barX, barY, barW, barH);
-      sctx.fillStyle = "#00d7ff";
-      sctx.fillRect(barX, barY, barW * theta, barH);
-
-      sctx.fillStyle = "#aab3bd";
-      sctx.font = "12px system-ui, sans-serif";
-      sctx.fillText(`Y(Ei) = ${m.Y.toFixed(3)} adsorbate/ion`, 22, 44);
-      sctx.fillText(`sites = ${totalSites}, visualized occupancy = ${sites.reduce((a, b) => a + b, 0)}`, 22, 62);
-    }
-
-    function exactThetaStep(dtPhys, m) {
-      if (dtPhys <= 0) return;
-
-      if (m.rate <= 0) {
-        theta = Math.max(0, Math.min(1, theta));
-        return;
+      for (const p0 of particles.ions) {
+        ctx.beginPath();
+        ctx.arc(p0.x, p0.y, p0.r, 0, 2 * Math.PI);
+        ctx.fillStyle = "#ff4dff";
+        ctx.fill();
       }
 
-      theta = m.thetaSS + (theta - m.thetaSS) * Math.exp(-m.rate * dtPhys);
-      theta = Math.max(0, Math.min(1, theta));
-    }
-
-    function pushChartPoint(m, timeWindow) {
-      chartTheta.push({ x: tPhys, y: theta });
-      chartThetaSS.push({ x: tPhys, y: m.thetaSS });
-
-      const minT = Math.max(0, tPhys - timeWindow);
-
-      while (chartTheta.length > 0 && chartTheta[0].x < minT) {
-        chartTheta.shift();
-        chartThetaSS.shift();
+      for (const p0 of particles.desorbates) {
+        ctx.globalAlpha = clamp(p0.life / 1.2, 0, 1);
+        ctx.beginPath();
+        ctx.arc(p0.x, p0.y, p0.r, 0, 2 * Math.PI);
+        ctx.fillStyle = "#ffad33";
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
       }
 
-      chart.options.scales.x.min = minT;
-      chart.options.scales.x.max = Math.max(timeWindow, tPhys);
-      chart.update("none");
+      ctx.fillStyle = "#8da0b4";
+      ctx.font = "12px system-ui, sans-serif";
+      ctx.fillText("vacuum / sheath side", 26, 22);
+
+      ctx.fillStyle = "#8da0b4";
+      ctx.fillText("solid surface", 26, surfaceModel.slabY + surfaceModel.slabH + 22);
+
+      ctx.fillStyle = "#dbe4ee";
+      ctx.font = "13px system-ui, sans-serif";
+      ctx.fillText(`Θ = ${theta.toFixed(3)}`, w - 92, 22);
+
+      ctx.fillStyle = "#91a0af";
+      ctx.font = "12px system-ui, sans-serif";
+      ctx.fillText(canUseExact(p) ? "solver: exact" : "solver: RK4", w - 110, 40);
     }
 
-    function stepSimulation(dtPhys, elapsedRealForVisual) {
-      const p = readParams();
-      const m = calcModel(p);
+    function updateOutputs(p) {
+      out.valGammaN.textContent = fmtSci(p.gammaN, "m^-2 s^-1");
+      out.valTs.textContent = fmtFixed(p.Ts, 0, "K");
+      out.valNse.textContent = fmtSci(p.nse, "m^-3");
+      out.valTe.textContent = fmtFixed(p.Te, 1, "eV");
+      out.valEi.textContent = fmtFixed(p.Ei, 0, "eV");
 
-      exactThetaStep(dtPhys, m);
-      tPhys += dtPhys;
+      out.valNs.textContent = fmtSci(p.Ns, "m^-2");
+      out.valStick.textContent = fmtFixed(p.s, 3);
+      out.valEdes.textContent = fmtFixed(p.Edes0, 2, "eV");
+      out.valNu.textContent = fmtSci(p.nu0, "s^-1");
 
-      syncSitesToTheta();
-      spawnParticles(p, m, elapsedRealForVisual);
-      updateLabels(p, m);
-      pushChartPoint(m, p.timeWindow);
-      drawSurface(p, m);
-    }
+      out.valMi.textContent = fmtFixed(p.miAmu, 0, "amu");
+      out.valEth.textContent = fmtFixed(p.Eth, 0, "eV");
+      out.valYmax.textContent = fmtFixed(p.Ymax, 2);
 
-    function loop(now) {
-      const elapsedReal = Math.min(0.10, (now - lastFrame) / 1000);
-      lastFrame = now;
+      out.valDesOrder.textContent = fmtFixed(p.n, 1);
+      out.valAlphaE.textContent = fmtFixed(p.aE, 2, "eV");
+      out.valAlphaNu.textContent = fmtFixed(p.aNu, 2);
 
-      const p = readParams();
-      const m = calcModel(p);
-      updateLabels(p, m);
+      out.valSpeed.textContent = fmtFixed(p.speed, 2, "x");
+      out.valWindow.textContent = fmtFixed(p.timeWindow, 1, "s");
+      out.valVisualFlux.textContent = fmtFixed(p.visualFlux, 1);
 
-      if (running) {
-        const dtPhys = elapsedReal * p.speed;
-        stepSimulation(dtPhys, elapsedReal);
-      } else {
-        syncSitesToTheta();
-        drawSurface(p, m);
-      }
+      out.thetaNow.textContent = theta.toFixed(3);
+      out.solverNow.textContent = canUseExact(p)
+        ? "更新法: Exact"
+        : "更新法: RK4";
 
-      requestAnimationFrame(loop);
+      const thetaSS = findSteadyTheta(p);
+      const tau = estimateTau(p, thetaSS);
+      const r = ratesAt(theta, p);
+
+      out.mA.textContent = fmtSci(r.A, "s^-1");
+      out.mKpw.textContent = fmtSci(r.kPW, "s^-1");
+      out.mGammaI.textContent = fmtSci(r.Gi, "m^-2 s^-1");
+      out.mBion.textContent = fmtSci(r.Bion, "s^-1");
+      out.mThetaSS.textContent = fmtFixed(thetaSS, 3);
+      out.mTau.textContent = fmtSci(tau, "s");
     }
 
     function resetSimulation() {
-      theta = 0;
-      tPhys = 0;
-      sites.fill(0);
-      particles = [];
-      chartTheta.length = 0;
-      chartThetaSS.length = 0;
+      theta = 0.0;
+      tPhys = 0.0;
+      lastSampleT = -1e9;
+
+      for (const key of Object.keys(history)) {
+        history[key].length = 0;
+      }
+
+      particles.radicals.length = 0;
+      particles.ions.length = 0;
+      particles.desorbates.length = 0;
+      particles.radAcc = 0;
+      particles.ionAcc = 0;
+      particles.desAcc = 0;
+
+      surfaceModel.occupied.fill(false);
+      surfaceModel.occupiedCount = 0;
 
       const p = readParams();
-      chart.options.scales.x.min = 0;
-      chart.options.scales.x.max = p.timeWindow;
-      chart.update("none");
+      pushHistory(p);
+      updateOutputs(p);
+      updateChartData(p);
+      drawSurfacePanel(p);
     }
 
     function singleStep() {
       const p = readParams();
-      const dtPhys = 0.02 * p.speed;
-      stepSimulation(dtPhys, 0.08);
+      const dt = 0.01;
+      advancePhysical(dt, p);
+      syncOccupancy();
+      pushHistory(p);
+      updateOutputs(p);
+      updateChartData(p);
+      drawSurfacePanel(p);
     }
 
-    document.getElementById("pauseBtn").addEventListener("click", () => {
-      running = !running;
-      document.getElementById("pauseBtn").textContent = running ? "一時停止" : "再開";
-    });
+    function bindInputs() {
+      const allInputs = [
+        ui.gammaNLog, ui.ts, ui.nseLog, ui.te, ui.ei,
+        ui.nsLog, ui.stick, ui.edes, ui.nuLog,
+        ui.mi, ui.eth, ui.ymax,
+        ui.desOrder, ui.alphaE, ui.alphaNu,
+        ui.speedLog, ui.timeWindow, ui.visualFlux
+      ];
 
-    document.getElementById("resetBtn").addEventListener("click", () => {
-      resetSimulation();
-    });
-
-    document.getElementById("stepBtn").addEventListener("click", () => {
-      if (!running) singleStep();
-    });
-
-    Object.values(ui).forEach(el => {
-      el.addEventListener("input", () => {
-        const p = readParams();
-        const m = calcModel(p);
-        updateLabels(p, m);
+      allInputs.forEach(el => {
+        el.addEventListener("input", () => {
+          const p = readParams();
+          updateOutputs(p);
+          updateRatePanelVisibility();
+          if (history.theta.length === 0) pushHistory(p);
+          updateChartData(p);
+          drawSurfacePanel(p);
+          lastFrame = performance.now();
+        });
       });
-    });
 
+      ui.showRates.addEventListener("change", () => {
+        updateRatePanelVisibility();
+        const p = readParams();
+        updateChartData(p);
+        lastFrame = performance.now();
+      });
+
+      pauseBtn.addEventListener("click", () => {
+        running = !running;
+        pauseBtn.textContent = running ? "一時停止" : "再開";
+        lastFrame = performance.now();
+      });
+
+      resetBtn.addEventListener("click", () => {
+        resetSimulation();
+        lastFrame = performance.now();
+      });
+
+      stepBtn.addEventListener("click", () => {
+        if (running) {
+          running = false;
+          pauseBtn.textContent = "再開";
+        }
+        singleStep();
+        lastFrame = performance.now();
+      });
+    }
+
+    function animate(now) {
+      const p = readParams();
+      let dtReal = (now - lastFrame) * 1e-3;
+      lastFrame = now;
+
+      dtReal = Math.min(dtReal, 0.05);
+
+      if (running) {
+        const dtPhys = dtReal * p.speed;
+        if (dtPhys > 0) {
+          advancePhysical(dtPhys, p);
+
+          if (tPhys - lastSampleT >= sampleInterval(p)) {
+            pushHistory(p);
+            lastSampleT = tPhys;
+          }
+        }
+
+        syncOccupancy();
+        spawnVisualParticles(dtReal, p);
+        updateVisualParticles(dtReal);
+      }
+
+      updateOutputs(p);
+      updateChartData(p);
+      drawSurfacePanel(p);
+
+      requestAnimationFrame(animate);
+    }
+
+    initSurfaceSites();
+    bindInputs();
+    updateRatePanelVisibility();
     resetSimulation();
-    requestAnimationFrame(loop);
+    requestAnimationFrame(animate);
   </script>
 </body>
 </html>
